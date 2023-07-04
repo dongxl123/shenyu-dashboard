@@ -149,3 +149,39 @@ export function filterTree(treeNode, func = () => {}, treeChildrenAtrr = "childr
     })
   }
 }
+
+/**
+ * merge paasParams to url
+ *
+ * @param {string} url
+ */
+export function mergePaasParams(url) {
+  let paasParams = window.location.href.split('?')[1];
+  if(paasParams == null) {
+    return url;
+  }
+  paasParams = paasParams.split("#")[0];
+  if (url.indexOf('?')>0){
+    url = `${url}&${paasParams}`;
+  } else {
+    url = `${url}?${paasParams}`;
+  }
+  return url;
+}
+
+/**
+ * get paasParamValue by key
+ *
+ * @param {string} key
+ */
+export function getPagePaasParams(key){
+  let paasParams = window.location.href.split('?')[1];
+  if(paasParams == null) {
+    return "";
+  }
+  let paasParamMap = parse(paasParams.split("#")[0]);
+  if(paasParamMap == null) {
+    return "";
+  }
+  return paasParamMap[key];
+}

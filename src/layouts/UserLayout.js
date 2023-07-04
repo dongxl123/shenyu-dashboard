@@ -6,7 +6,7 @@ import { Icon, message } from "antd";
 import GlobalFooter from "../components/GlobalFooter";
 import styles from "./UserLayout.less";
 import logo from "../assets/logo.svg";
-import { getRoutes, getPageQuery, getQueryPath } from "../utils/utils";
+import { getRoutes, getPageQuery, getQueryPath, getPagePaasParams } from "../utils/utils";
 
 message.config({
   top: 200,
@@ -54,6 +54,7 @@ class UserLayout extends React.PureComponent {
                 </Link>
               </div>
               <div className={styles.desc}>ShenYu Gateway Management System</div>
+              <div className={styles.desc}>应用：{getPagePaasParams("app")}<span style={{paddingLeft:20}} />所在集群：{getPagePaasParams("paasBasicClusterCode")}</div>
             </div>
             <Switch>
               {getRoutes(match.path, routerData).map(item => (

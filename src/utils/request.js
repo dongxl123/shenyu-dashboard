@@ -3,6 +3,7 @@ import { notification } from 'antd';
 import { routerRedux } from 'dva/router';
 import store from '../index';
 import { getIntlContent } from './IntlUtils'
+import { mergePaasParams } from "./utils";
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -96,6 +97,8 @@ export default function request(url, options) {
     }
     newOptions.headers = {...newOptions.headers,"X-Access-Token":token};
   }
+  // paas集成
+  url = mergePaasParams(url);
 
   return fetch(url, newOptions)
     .then(checkStatus)

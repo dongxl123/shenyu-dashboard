@@ -1,7 +1,7 @@
 import './polyfill';
 import dva from 'dva';
 
-import createHistory from 'history/createHashHistory';
+import { createHashHistory } from 'history';
 // user BrowserHistory
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
@@ -21,8 +21,8 @@ const middlewares = [];
 
 /** get session storage */
 if (window.sessionStorage.getItem('locale') === undefined || window.sessionStorage.getItem('locale') === null) {
-  initIntl('en-US');
-  window.sessionStorage.setItem('locale', 'en-US');
+  initIntl('zh-CN');
+  window.sessionStorage.setItem('locale', 'zh-CN');
 } else {
   initIntl(window.sessionStorage.getItem('locale'));
 }
@@ -31,7 +31,7 @@ emit.on('change_language', lang => initIntl(lang));
 
 // 1. Initialize
 const app = dva({
-  history: createHistory(),
+  history: createHashHistory(),
   onAction: middlewares,
 });
 
